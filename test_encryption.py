@@ -1,7 +1,7 @@
-from encryption import EncryptionSystem
+import encryption
 
-first_text = EncryptionSystem.encrypt_text("Why so Serious?", 16)
+first_text = encryption.encrypt_message("Why so Serious?", "limao")
 print(first_text)
 
-second_text = EncryptionSystem.encrypt_text("Are you hungry?", -12)
+second_text = encryption.encrypt_message("Are you hungry?", "laranja")
 print(second_text)
