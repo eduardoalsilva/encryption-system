@@ -1,32 +1,25 @@
 import string
 
-class EncryptionSystem:
-    def __init__(self):
-        pass
+def vigenere(message, key, direction=1):
+    alphabet = string.ascii_letters
+    key_index = 0
 
-    def encrypt_text(text, shift):
-        alphabet = string.ascii_letters
+    final_message = ''
+    for char in message:
+        if not char.isalpha():
+            final_message += char
+            continue
 
-        encrypted_text = ''
-        for char in text:
-            if not char.isalpha():
-                encrypted_text += char
-                continue
-            index = alphabet.find(char)
-            encrypted_text += alphabet[(index + shift) % len(alphabet)]
+        key_char = key[key_index % len(key)]
+        key_index += 1
+        offset = alphabet.find(key_char)
+        index = alphabet.find(char)
+        final_message += alphabet[(index + offset * direction) % len(alphabet)]
 
-        return encrypted_text
-    
-    def decrypt_text(encrypted_text, original_shift):
-        alphabet = string.ascii_letters
+    return final_message
 
-        decrypted_text = ''
-        for char in encrypted_text:
-            if not char.isalpha():
-                decrypted_text += char
-                continue
+def encrypt_message(message, key):
+    return vigenere(message, key)
 
-            index = alphabet.find(char)
-            decrypted_text += alphabet[(index - original_shift) % len(alphabet)]
-
-        return decrypted_text
+def decrypt_message(message, key):
+    return vigenere(message, key, -1)
